@@ -68,5 +68,3 @@ autolabel(rects_2, axx_2)
 fig = plt.gcf()
 plt.show()
 
-# asdasd
-# asdasd
