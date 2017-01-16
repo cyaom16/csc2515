@@ -84,9 +84,9 @@ def InitCNN(num_channels, filter_size, num_filters_1, num_filters_2,
     W2 = 0.1 * np.random.randn(filter_size, filter_size,
                                num_filters_1, num_filters_2)
     W3 = 0.01 * np.random.randn(num_filters_2 * 64, num_outputs)
-    b1 = np.zeros((num_filters_1))
-    b2 = np.zeros((num_filters_2))
-    b3 = np.zeros((num_outputs))
+    b1 = np.zeros(num_filters_1)
+    b2 = np.zeros(num_filters_2)
+    b3 = np.zeros(num_outputs)
     model = {
         'W1': W1,
         'W2': W2,
@@ -157,12 +157,10 @@ def Conv2DBackward(grad_y, x, y, w):
         grad_x: Gradients wrt. the inputs.
         grad_w: Gradients wrt. the weights.
     """
-    ###########################
-    # Insert your code here.
     I, J = w.shape[0:2]
-    grad_w_t = Conv2D(np.transpose(x, [3,1,2,0]), np.transpose(grad_y, [1,2,0,3]), pad=(I-1,J-1))
-    grad_w = np.transpose(grad_w_t, [1,2,0,3])
-    grad_x = Conv2D(grad_y, np.transpose(w, [0,1,3,2])[::-1,::-1,:,:], pad=(I-1,J-1))
+    grad_w_t = Conv2D(np.transpose(x, [3, 1, 2, 0]), np.transpose(grad_y, [1, 2, 0, 3]), pad=(I-1, J-1))
+    grad_w = np.transpose(grad_w_t, [1, 2, 0, 3])
+    grad_x = Conv2D(grad_y, np.transpose(w, [0, 1, 3, 2])[::-1, ::-1, :, :], pad=(I-1, J-1))
     return grad_x, grad_w
 
 
@@ -326,7 +324,7 @@ def main():
 
         # Train model.
         trained_model, stats = Train(model, CNNForward, CNNBackward, CNNUpdate, setting['eps'],
-                      setting['momentum'], setting['num_epochs'], setting['batch_size'])
+                                     setting['momentum'], setting['num_epochs'], setting['batch_size'])
 
         # Uncomment if you wish to save the model.
         Save(setting['model_fname'], trained_model)

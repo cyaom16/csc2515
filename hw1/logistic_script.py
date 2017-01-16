@@ -21,7 +21,7 @@ weights = np.random.randn(M+1, 1)
 weights /= np.max(weights)
 
 alpha = 0.1
-penalty = -0.5*alpha*np.dot(weights.T, weights) + 0.5*np.log(2*math.pi*alpha**-1)
+penalty = -0.5 * alpha*np.dot(weights.T, weights) + 0.5 * np.log(2*math.pi*alpha**-1)
 # run_check_grad(hyper_parameters)
 
 print penalty
